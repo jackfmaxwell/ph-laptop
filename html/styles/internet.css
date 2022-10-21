@@ -1,0 +1,472 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+#internet-app {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  background-color: #D5E7F2;
+  border-radius: 2px;
+  transition: 0.5s;
+  -webkit-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.06);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.06);
+  z-index: 20;
+}
+
+#internet-app.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+#internet-app .navigation {
+  margin-top: 50px;
+  margin-left: 6%;
+  margin-right: 6%;
+  padding: 10px;
+  left: 0;
+  z-index: 999;
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  justify-items: end;
+}
+
+#internet-app .navigation .topnav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  justify-items: end;
+}
+
+#internet-app .navigation .topnav button {
+  font-weight: 800;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 5px;
+  margin: 5px;
+  text-transform: uppercase;
+  background: transparent;
+  z-index: 10;
+  transition: 0.5s;
+}
+
+#internet-app .navigation .topnav button:hover {
+  cursor: pointer;
+  background-color: #94CEF2;
+  color: #fff;
+}
+
+#internet-app .navigation .home-button.active {
+  background-color: #1db15b;
+  color: #fff;
+}
+
+#internet-app .navigation i,
+p {
+  color: #fff;
+  margin: 5px;
+  padding: 0;
+}
+
+#internet-app .navigation button:hover {
+  cursor: pointer;
+}
+
+#internet-app .appcontainer {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-size: 16px;
+  font-family: Consolas,monaco,monospace; 
+  width:100%;
+}
+
+#internet_searchQueryInput{
+  width: 100%;
+  height: 2.8rem;
+  outline: none;
+  border: none;
+  border-radius: 1.625rem;
+  padding: 0 3.5rem 0 1.5rem;
+  font-size: 1rem;
+  z-index:4;
+}
+.searchHomePage{
+  width:14vh;
+  height:4vh;
+  background-color: #31679a;
+  border:none;
+  position: absolute;
+  float:left;
+  margin-left: 1vh;
+  font-size: x-large;
+}
+.searchHomePage:hover{
+  background-color: #A2DCF2;
+}
+
+#internet_searchQuerySubmit {
+  width: 3.5rem;
+  height: 2.8rem;
+  margin-left: -3.5rem;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+#internet_searchQuerySubmit:hover {
+  cursor: pointer;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+#internet-app header {
+  z-index: 1000;
+}
+
+#internet-app > header > nav {
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px 20px;
+  border-width: 1px;
+  flex-direction: row;
+  width: 100%;
+  height: 35px;
+  background-color: #94CEF2;
+  z-index: 10;
+}
+
+#internet-app > header > nav > h1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  margin: 0;
+  padding: 0;
+}
+
+#internet-app > header > nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+}
+
+#internet-app > header :active {
+  cursor: move;
+  user-select: none;
+}
+
+#internet-app .loading {
+  /* make it larger and centered */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: x-large;
+  transition: 1s;
+}
+
+.search-content-container{
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: 100%;
+  overflow: auto;
+  margin-top:0vh;
+}
+.search-content{
+  display: grid; 
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
+  gap: 15px 15px;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+
+.homepage-content-container{
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: 100%;
+  overflow: auto;
+  margin-top:0vh;
+}
+.homepage-content{
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-flow: row;
+  gap: 15px 15px;
+  overflow: auto;
+  margin-bottom: 10px;
+}
+
+.website-home-icon{
+  height: auto; 
+  padding: 10px;
+  text-align: center;
+  margin: 10px;
+  color: white;
+  font-size: 20px;
+  color: white;
+  overflow: visible;
+}
+.search-item-title{
+  float:left; 
+  margin-left:1vh;
+}
+.search-item-description{
+  float:left; margin-left:1vh; margin-top:3vh;
+  bottom:0;
+}
+.search-website-image {
+  height:125px !important; 
+  width: 212px !important;
+  margin: 10px;
+  float:left;
+}
+
+.website-image {
+  height:250px !important; 
+  width: 425px !important;
+  margin: 10px;
+
+}
+.website-home-image {
+  height:1250px !important; 
+  width: 2125px !important;
+  margin:auto;
+  background-color: red;
+}
+.website-home-side-image {
+  height:1275px !important; 
+  width: 750px !important;
+  margin:auto;
+  background-color: red;
+  float:left;
+  margin-left:4vh;
+}
+
+.website-home-icon:hover {
+  background-color: #A2DCF2;
+}
+.homepage-categories{
+  background-color: #B8BEC2;
+  height:3.5vh;
+  width: 100%;
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-flow: row;
+  gap: 15px 15px;
+}
+.homepage-category{
+  height:100%; 
+  padding: 10px;
+  text-align: center;
+  margin: 10px;
+  border-right:3px solid #929292;
+  border-left:3px solid #929292;
+}
+.homepage-category:hover{
+  background-color: #fafdfe;
+  color: black;
+}
+
+.hamburgermenu > .hamburgeroption {
+  background-color: #7fb4e4;
+  padding: 10px;
+  width:100%; 
+  text-align: center;
+}
+.hamburgermenu > .hamburgeroption:hover{
+  background-color: #dbebfb;
+}
+.hamburgermenu{
+  background-color: #7fb4e4;
+  display:block; 
+  position:absolute; 
+  left:0.5vh; 
+  top:13vh; 
+  width:12vh; 
+  height:fit-content; 
+  text-align: left; 
+}
+
+.hamburgermenubars > i{
+  position:absolute; 
+  left:2vh;  
+  top:13vh; 
+  font-size:40px; 
+  color:#ffffff;
+}
+
+.webpage-button{
+  border:none; 
+  color: #032340;         
+  padding: 15px 32px;         
+  text-align: center;            
+  text-decoration: none;        
+  display: inline-block;
+  font-size: 16px; 
+  background-color: #ffff;
+  max-width:8vh !important;
+}
+.webpage-button:hover{
+  background-color: #31679a;
+}
+
+.webpage-content{
+  background-color: #282323;
+  border:none;
+}
+h1{
+  font-size: 52px;
+  font-style: bold;
+}
+
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  color:black;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 25%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+  color:black;
+}
+label{
+  color:black;
+}
+a{
+  color:black;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 30%; /* Could be more or less, depending on screen size */
+  color: black;
+
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.formbutton {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.formbutton:hover {
+  opacity: 0.8;
+}
+.cancelbtn{
+  border:none;
+  float:left;
+  margin-left: 1vh;
+}
+.cancelbtn:hover {
+  opacity: 0.8;
+}
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oculum OS</title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+   
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css"/>
+    <link rel="stylesheet" href="./styles/cli.css"/>
+    <link rel="stylesheet" href="./styles/setting.css"/>
+    <link rel="stylesheet" href="./styles/wifi.css"/>
+    <link rel="stylesheet" href="./styles/confirmbox.css"/>
+    <link rel="stylesheet" href="./styles/internet.css"/>
+    <link rel="stylesheet" href="./styles/tor.css"/>
+
+  </head>
+  <body oncopy="false" oncut="false" onpaste="false">
+    <div class="laptop">
+      <div class="desktop">
+        <div class="notification">
+          <!-- notification goes here -->
+        </div>
+        <div class="apps">
+
+          <div id="settings">
+            <div class="appcontainer">
+              <div class="setting-title">
+                <p style="font-size: large">Settings</p>
+              </div>
+              <div class="setting-body">
+                <div class="bg-input">
+                  <p>Wallpaper</p>
+                  <input id="background" type="url" inputmode="url" />
+                </div>
+                <div class="audio-settings">
+                  <p>Audio</p>
+                  <div class="audio-slider">
+                    <input
+                      id="volume-control"
+                      type="range"
+                      value="50"
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                </div>
+                <div class="toggle-text">
+                  <p>Desktop Text Color</p>
+                  <div class="toggle-div">
+                    <label for="toggle-text-color">
+                      <input
+                        type="checkbox"
+                        name="toggle-text-color"
+                        id="toggle-text-color"
+                      />
+                    </label>
+                    <p style="font-size: medium">Black/White</p>
+                  </div>
+                </div>
+              </div>
+              <div class="setting-confirm">
+                <button class="save-config">Save Config</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="wifis">
+            <div class="appcontainer">
+              <div class="wifi-title">
+                <p style="font-size: large">Networks</p>
+              </div>
+              <div class="wifi-body">
+                
+              </div>
+
+            </div>
+          </div>
+
+          <div id="cli-app">
+            <header>
+              <nav>
+                <h1>Command Line Interface</h1>
+                <ul>
+                  <i
+                    id="close-cli"
+                    class="fa-solid fa-circle-xmark"
+                    style="font-size: 20px; color: rgb(245, 105, 105)"
+                  ></i>
+                </ul>
+              </nav>
+            </header>
+            <div class="appcontainer">
+              <div style="position:absolute; left:1vh; z-index: 2; bottom: 2.3vh; color: green; width:99%; height:90%; overflow-y:scroll;">
+                <div id="cmd_console" style="bottom:2.3vh; position:absolute; color: green;">
+                </div>
+              </div>
+              <div style="left:1vh; position:absolute; z-index: 3; bottom: 0; color: green; width:100%; height: 2vh;">
+                <span style="width:auto; z-index:4;"id="cursor">></span>
+                <input id="cmd_entry" style="position:absolute; border:none; margin-left:auto; width:100%; background:black; color: green; font-size: 16px;" type="text" onkeypress="handleKeyPress(event)">
+                </input></div>
+            </div>
+          </div>
+
+          <div id="internet-app">
+            <header>
+              <nav>
+                <h1>Internet</h1>
+                <ul>
+                  <i
+                    id="close-internet"
+                    class="fa-solid fa-circle-xmark"
+                    style="font-size: 20px; color: rgb(245, 105, 105)"
+                  ></i>
+                </ul>
+              </nav>
+            </header>
+            <div class="appcontainer">
+              <div style="position:sticky; width:100%; top:0; height:12vh; background-color: #559BD9;"><!--Top header-->
+                <div style="width:100%; position: absolute; top:5vh;" id="internet_search" >
+                  <button class="searchHomePage">Doogle</button>
+                  <input style="margin-left:10%; width:80%; background: #A2DCF2; color:white;"id="internet_searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
+                  <button id="internet_searchQuerySubmit" type="submit" name="searchQuerySubmit">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="homepage-categories">
+                <span class="homepage-category">
+                  Restuarants
+                </span>
+
+                <span class="homepage-category">
+                  Banking
+                </span>
+              </div>
+
+              <div class="homepage-content-container">
+                <div class="homepage-content"> 
+        
+                  <div class="website-home-icon">
+                    <img class="website-image" src="https://cdn.discordapp.com/attachments/1024130279784337438/1024157755533180959/unknown.png">
+                  </div>
+
+                  <div class="website-home-icon">
+                   
+                    <img class="website-image" src="https://cdn.discordapp.com/attachments/1024130279784337438/1024160557298884608/unknown.png">
+                  </div>
+
+                  <div class="website-home-icon">
+
+                    <img class="website-image" src="https://cdn.discordapp.com/attachments/1024130279784337438/1024160290864103434/unknown.png">
+                  </div>
+
+                  <div class="website-home-icon">
+                    
+                    <img class="website-image" src="https://cdn.discordapp.com/attachments/1024130279784337438/1024159850483175444/unknown.png">
+                  </div>
+
+                  <div class="website-home-icon">
+                    
+                    <img class="website-image" src="https://cdn.discordapp.com/attachments/1024130279784337438/1024161078952853514/unknown.png">
+                  </div>
+                  
+                  <div class="website-home-icon">
+                    
+                    <img class="website-image" src="https://cdn.discordapp.com/attachments/1024130279784337438/1024161219994734724/unknown.png">
+                  </div>
+                  
+                </div>
+              </div>
+
+              <div class="search-content-container">
+                <div class="search-content"> 
+        
+                </div>
+              </div>
+
+              <div class="webpage-content" style="text-align:center;">
+                <div id="burgershot-site">
+                  <div class="hamburgermenubars"><i class=" fas fa-bars"> </i></div>
+                  <div style="display:none;" class="hamburgermenu">
+                    <div style="text-align: left;" class="hamburgeroption exit">X</div>
+                    <div class="hamburgeroption">Home</div>
+                    <div class="hamburgeroption">About</div>
+                    <div class="hamburgeroption">See Menu</div>
+                    <div class="hamburgeroption">Careers</div>
+                  </div>
+                    <strong style="font-size:68px; text-align: center; margin-top:2vh; color:#ffff;">Burgershot</strong>
+                    <button class="webpage-button" onclick="document.getElementById('loginmodal').style.display='block'" style="position:absolute; right:3vh; margin-top:2vh;">Sign in</button>
+  
+                    <div style="margin-top:10vh;">
+                      <img class="website-home-image" src="https://cdn.discordapp.com/attachments/1024130279784337438/1024317429561704478/blurbuger.png">
+                    </div>
+  
+                    <div style="margin-top:1.5vh;">
+                      <img class="website-home-side-image" src="https://cdn.discordapp.com/attachments/1024130279784337438/1024344371409199134/unknown.png">
+                      <h1 style="margin-top:10vh">See the menu!</h1>
+  
+                      <h1 style="margin-top:15vh">Write a review</h1>
+                    </div>
+  
+                  <div id="loginmodal" class="modal">
+    
+                    <form class="modal-content animate">
+                      <div class="imgcontainer">
+                        <span onclick="document.getElementById('loginmodal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <img src="https://cdn.discordapp.com/attachments/1024130279784337438/1024366389231898755/unknown.png" alt="Avatar" class="avatar">
+                      </div>
+                  
+                      <div class="container">
+                        <label for="uname"><b>Username</b></label>
+                        <input id="formUsername" type="text" placeholder="Enter Username" name="uname" required>
+                  
+                        <label for="psw"><b>Password</b></label>
+                        <input id="formPassword" type="password" placeholder="Enter Password" name="psw" required>
+                          
+                        <button id="submitform" class="formbutton" type="submit">Login</button>
+                        <label style="float:left; margin-left:1vh;">
+                          <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                      </div>
+                  
+                      <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('loginmodal').style.display='none'" class="cancelbtn">Cancel</button>
+                        <span class="psw">Forgot <a href="#">password?</a></span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+               
+              </div>
+
+            </div>
+          </div>
+
+          <div id="tor-app">
+            <header>
+              <nav>
+                <h1>Tor Browser</h1>
+                <ul>
+                  <i
+                    id="close-tor"
+                    class="fa-solid fa-circle-xmark"
+                    style="font-size: 20px; color: rgb(245, 105, 105)"
+                  ></i>
+                </ul>
+              </nav>
+            </header>
+            <div class="appcontainer"  style="background-color: #200726;">
+              <div style="width:100%; top:0; height:12vh; background-color: #350C40;"><!--Top header-->
+                <div style="position: absolute; top:5vh;" id="tor_search" >
+                  <input style="background: #A192A6;" id="tor_searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
+                  <button id="tor_searchQuerySubmit" type="submit" name="searchQuerySubmit">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+             
+              <div class="webpage-content" style="background-color: #200726; text-align:center;">
+                <div style="display:none;" id="silkroad-site">
+                    <div style="float:left; position:absolute; margin-left:1vh; top:14vh; font-size: xx-large;">
+                      Silk Road
+                    </div>
+                    <div style="float:left; position:absolute; margin-left:1vh; top:16vh; font-size: large;">
+                      anonymous marketplace
+                    </div>
+                    <div style="right:1vh; position:absolute; top:14vh; font-size:medium;">
+                      Welcome bigbootyweapondealer12,
+                    </div>
+                    <div style="right:1vh;  position:absolute; top:16vh; font-size:medium;">
+                      <span style="display:inline">
+                        Messages(0)
+                      </span>
+                      <span style="display:inline">
+                        Orders(0)
+                      </span>
+                      <span style="display:inline">
+                        Account ₿1,200
+                      </span>
+                    </div>
+
+                    <hr style="position:absolute; top:18vh; width:100%; left:0;">
+                    <div style=" font-size:larger; width:10vh; text-align:left; position:absolute; left:1vh; top:18.5vh; height:100%;">
+                      <i class="store-nav-cat">Drugs</i>
+                      <br>
+                      Digital Goods
+                      <br>
+                      Electronics
+                      <br>
+                      Chemicals
+                    </div>
+                    <div class="website-store-content">
+
+                    </div>
+                    <div style="display:none;" class="website-store-inspect">
+                      <div class="website-store-inspect-photocontainer">
+                        <img id="website-store-inspect-photo" style="height:540px !important; 
+                        width: 800px !important;" src="https://cdn.discordapp.com/attachments/995302330671046706/1026557573396168815/screenshot.jpg">
+                      </div>
+
+                      <div id="website-store-inspect-title">
+                        Micro SMG, serial number scratched off
+                      </div>
+
+
+                      <div style="margin-top:4%; position:absolute; left: 870px;">
+                        <div id="website-store-inspect-sellername">
+                          Seller: obamabintweakin
+                        </div>
+  
+                        <div id="website-store-inspect-price">
+                          Price: ₿3
+                        </div>
+  
+                        <div id="website-store-inspect-quantityleft">
+                          4 left
+                        </div>
+                      </div>
+                    
+
+                      <div>
+                        <button id="insepct-ad-purchase">Purchase</button>
+                      </div>
+
+                    </div>
+                    <!--<button class="webpage-button" onclick="document.getElementById('loginmodal').style.display='block'" style="position:absolute; right:3vh; margin-top:2vh;">Sign in</button>
+                    -->
+
+  
+                  <div id="loginmodal" class="modal">
+    
+                    <form class="modal-content animate">
+                      <div class="imgcontainer">
+                        <span onclick="document.getElementById('loginmodal').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <img src="https://cdn.discordapp.com/attachments/1024130279784337438/1024366389231898755/unknown.png" alt="Avatar" class="avatar">
+                      </div>
+                  
+                      <div class="container">
+                        <label for="uname"><b>Username</b></label>
+                        <input id="formUsername" type="text" placeholder="Enter Username" name="uname" required>
+                  
+                        <label for="psw"><b>Password</b></label>
+                        <input id="formPassword" type="password" placeholder="Enter Password" name="psw" required>
+                          
+                        <button id="submitform" class="formbutton" type="submit">Login</button>
+                        <label style="float:left; margin-left:1vh;">
+                          <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                      </div>
+                  
+                      <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('loginmodal').style.display='none'" class="cancelbtn">Cancel</button>
+                        <span class="psw">Forgot <a href="#">password?</a></span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+               
+                  <div style="display:none;" style="background-color: #200726;" id="404-site">
+                    <div style="background-color: #200726; text-align: center; font-size: 48px; margin-top:20%;">404 ERROR</div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="wificonnect-app">
+            <header>
+              <nav>
+                <h1>Connect to Network</h1>
+                <ul>
+                  <i
+                    id="close-wificonnect"
+                    class="fa-solid fa-circle-xmark"
+                    style="font-size: 20px; color: rgb(245, 105, 105)"
+                  ></i>
+                </ul>
+              </nav>
+            </header>
+            <div class="appcontainer">
+              <div style="margin-top:16vh;">
+                <p style="text-align:center; font-size: large">Enter Password</p>
+                <input id="passwordEntry" style="position:absolute; border:none; left:4vh; right:4vh; width:90%; height: 4vh; background:rgba(55, 57, 64, 0.764); color: rgb(240, 252, 240); font-size: 22px;" type="text" onkeypress="handleKeyPress(event)">
+                </input>
+              </div>
+               
+            </div>
+          </div>
+        
+        </div>
+
+        <div class="desktopicons">
+          <div id="cli-icon-desktop" style="display:none;">
+            <img
+              id="cli"
+              class="icon"
+              src="./assets/cli.png"
+              alt="cli"
+            />
+            <p>CLI</p>
+          </div>
+
+          <div style="display:unset;">
+            <img
+              id="internet"
+              class="icon"
+              src="./assets/internet.png"
+              alt="internet"
+            />
+            <p>Internet</p>
+          </div>
+
+          <div style="display:unset;"> 
+            <img
+              id="tor"
+              class="icon"
+              src="./assets/toricon.svg"
+              alt="tor"
+            />
+            <p>Tor</p>
+          </div>
+          
+
+          <div style="display:unset;">
+            <img
+              id="runescape"
+              class="icon"
+              src="./assets/runescape-icon.png"
+              alt="runescape"
+            />
+            <p>Runescape</p>
+          </div>
+
+          
+        </div>
+      </div>
+
+      <div class="winmanager">
+        <div class="left-icons">
+          <div class="icon start">
+            <img class="start" src="./assets/logo.png" alt="" />
+          </div>
+        </div>
+
+        <div class="right-icons">
+          <i id="setting" class="fas fa-duotone fa-gear"></i>
+          <i id="wifi" class="fas fa-wifi"></i>
+          <i id="volume" class="fas fa-volume-up"></i>
+          <i class="fas fa-battery-half"></i>
+          <div class="date-time">
+            <span id="time"></span>
+            <span id="date"></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <script src="./js/app.js"></script>
+    <script src="./js/cli.js"></script>
+    <script src="./js/internet.js"></script>
+    <script src="./js/tor.js"></script>
+  </body>
+</html>
